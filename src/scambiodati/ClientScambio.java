@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author gorin
+ * @version 14/02/2020
  */
 public class ClientScambio {
 
