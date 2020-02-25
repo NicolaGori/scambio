@@ -26,35 +26,36 @@ public class ServerScambio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int porta = 25000;
+        int porta = 25000; //Porta TCP e UDP per far avvenire una chat room - per ulteriori dettagli guardare la dispensa
         String messaggio;
         ServerSocket sSocket = null;
         
         try{
             //ServerSocket sSocket =  new ServerSocket(porta);
-            sSocket =  new ServerSocket(porta);
+            sSocket =  new ServerSocket(porta); //Istanzio il Server Socket passandogli la Porta
             System.out.println("Server in attesa...");
 
-            Socket connessione;
-            connessione=sSocket.accept();
-            System.out.println("Server e Client sono connessi...");
+            Socket connessione; //creo il Socket per la connessione
+            connessione=sSocket.accept();   //Attesa fino ad effettiva connessione 
+            System.out.println("Server e Client sono connessi..."); //confermo che la connessione è avvenuta
             System.out.println("");
 
             //---------------------------------------------------------------------------//
-            BufferedReader in = new BufferedReader(new InputStreamReader(connessione.getInputStream()));
-            PrintWriter out = new PrintWriter(connessione.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(connessione.getInputStream()));    //Stream or. Caratteri per ricevere il messaggio del client
+            PrintWriter out = new PrintWriter(connessione.getOutputStream(), true); //Stream di Output, per inviare il messaggio del server
 
-            messaggio = in.readLine();
-            System.out.println("Messaggio del Client: "+ messaggio);
+            messaggio = in.readLine();  //acquisisco il messaggio del client
+            System.out.println("Messaggio del Client: "+ messaggio);    //stampo il messaggio del client
 
-            out.println("Server");
+            out.println("Server");  //messaggio del server da inviare
+            
         } catch (IOException ex){
-            System.err.println("Errore");
+            System.err.println("Errore");   //gestisce gli errori
         } finally {
             try {
-                sSocket.close();
+                sSocket.close();    //chiusura del socket
             } catch (IOException ex) {
-                System.err.println("Errore in chiusura");
+                System.err.println("Errore in chiusura");   //gestione dell'errore di chiusura
             }
         }
     }
